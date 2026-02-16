@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌙 Moonify Script Generator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #f0f0f0;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        input[type="text"]:focus,
+        select:focus,
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .result-section {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result-section.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .result-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .result-content {
+            background: #f9f9f9;
+            padding: 30px;
+            border: 2px solid #e0e0e0;
+            border-top: none;
+            border-radius: 0 0 12px 12px;
+            white-space: pre-wrap;
+            line-height: 1.8;
+            font-size: 1.05em;
+            max-height: 600px;
+            overflow-y: auto;
+        }
+
+        .copy-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid white;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s ease;
+        }
+
+        .copy-btn:hover {
+            background: white;
+            color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        .error {
+            background: #fee;
+            border: 2px solid #fcc;
+            color: #c33;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .error.show {
+            display: block;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        .moon-icon {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Scrollbar styling */
+        .result-content::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .result-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .result-content::-webkit-scrollbar-thumb {
+            background: #667eea;
+            border-radius: 10px;
+        }
+
+        .result-content::-webkit-scrollbar-thumb:hover {
+            background: #764ba2;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="moon-icon">🌙</span> Moonify</h1>
+            <p>AI-Powered Script Generator</p>
+            <p style="margin-top: 10px;">
+                <a href="/ideas" style="color: #fff; text-decoration: underline; font-weight: 600;">Find trending ideas first</a>
+            </p>
+        </div>
+
+        <div class="card">
+            <form id="scriptForm">
+                <div class="form-group">
+                    <label for="topic">📝 What's your script about?</label>
+                    <input 
+                        type="text" 
+                        id="topic" 
+                        name="topic" 
+                        placeholder="e.g., The Future of AI in Healthcare"
+                        required
+                    >
+                </div>
+
+                <div class="row">
+                    <div class="form-group">
+                        <label for="scriptType">🎬 Script Type</label>
+                        <select id="scriptType" name="script_type">
+                            <option value="general">General</option>
+                            <option value="video">Video Script</option>
+                            <option value="podcast">Podcast</option>
+                            <option value="presentation">Presentation</option>
+                            <option value="youtube">YouTube Video</option>
+                            <option value="explainer">Explainer Video</option>
+                            <option value="commercial">Commercial</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="duration">⏱️ Duration</label>
+                        <select id="duration" name="duration">
+                            <option value="30 seconds">30 seconds</option>
+                            <option value="1 minute">1 minute</option>
+                            <option value="2-3 minutes" selected>2-3 minutes</option>
+                            <option value="5 minutes">5 minutes</option>
+                            <option value="10 minutes">10 minutes</option>
+                            <option value="15+ minutes">15+ minutes</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="tone">🎭 Tone & Style</label>
+                    <select id="tone" name="tone">
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual & Friendly</option>
+                        <option value="energetic">Energetic & Exciting</option>
+                        <option value="educational">Educational</option>
+                        <option value="inspirational">Inspirational</option>
+                        <option value="humorous">Humorous</option>
+                        <option value="dramatic">Dramatic</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn" id="generateBtn">
+                    ✨ Generate Script
+                </button>
+            </form>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>🌙 Moonify is crafting your script...</p>
+            </div>
+
+            <div class="error" id="error"></div>
+
+            <div class="result-section" id="resultSection">
+                <div class="result-header">
+                    <span id="resultTitle">📜 Your Generated Script</span>
+                    <button class="copy-btn" id="copyBtn">📋 Copy</button>
+                </div>
+                <div class="result-content" id="resultContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('scriptForm');
+        const loading = document.getElementById('loading');
+        const resultSection = document.getElementById('resultSection');
+        const resultContent = document.getElementById('resultContent');
+        const errorDiv = document.getElementById('error');
+        const generateBtn = document.getElementById('generateBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const topicInput = document.getElementById('topic');
+
+        const params = new URLSearchParams(window.location.search);
+        const topicParam = params.get('topic');
+        if (topicParam) {
+            topicInput.value = topicParam;
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Hide previous results and errors
+            resultSection.classList.remove('show');
+            errorDiv.classList.remove('show');
+            loading.classList.add('show');
+            generateBtn.disabled = true;
+
+            const formData = {
+                topic: topicInput.value,
+                script_type: document.getElementById('scriptType').value,
+                duration: document.getElementById('duration').value,
+                tone: document.getElementById('tone').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:5000/generate-script', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    resultContent.textContent = data.script;
+                    resultSection.classList.add('show');
+                } else {
+                    throw new Error(data.error || 'Failed to generate script');
+                }
+            } catch (error) {
+                errorDiv.textContent = `❌ Error: ${error.message}. Make sure the server is running!`;
+                errorDiv.classList.add('show');
+            } finally {
+                loading.classList.remove('show');
+                generateBtn.disabled = false;
+            }
+        });
+
+        copyBtn.addEventListener('click', () => {
+            const text = resultContent.textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                copyBtn.textContent = '✅ Copied!';
+                setTimeout(() => {
+                    copyBtn.textContent = '📋 Copy';
+                }, 2000);
+            }).catch(err => {
+                alert('Failed to copy text');
+            });
+        });
+    </script>
+</body>
+</html>
