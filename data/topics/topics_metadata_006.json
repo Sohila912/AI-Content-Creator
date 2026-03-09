@@ -1,0 +1,110 @@
+{
+    "generated_at": "2026-03-08T09:08:26.829202+00:00",
+    "query": "AI in medicine",
+    "time_range": "week",
+    "topics_count": 6,
+    "topics": [
+        {
+            "topic_id": "topic_001",
+            "title": "Artificial Intelligence Applications in Medical Devices for Personalized ...",
+            "description": "like hypertension and heart disease, wearable technologies equipped with AI can predict exacerbations, enabling preemptive medical interventions that tailor treatments to the nuances of an individual’",
+            "url": "https://www.jmir.org/2026/1/e72410",
+            "headline": "Artificial Intelligence Applications in Medical Devices for Personalized ...",
+            "summary": "like hypertension and heart disease, wearable technologies equipped with AI can predict exacerbations, enabling preemptive medical interventions that tailor treatments to the nuances of an individual’",
+            "source_url": "https://www.jmir.org/2026/1/e72410",
+            "source_domain": "www.jmir.org",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.9952077
+        },
+        {
+            "topic_id": "topic_002",
+            "title": "How AI is advancing medical research",
+            "description": "these proteins on histological stains, AI models may enable doctors to more confidently link brain tissue findings to other biomarkers emerging from blood, fluid, and imaging tests, improving the accu",
+            "url": "https://www.med.wisc.edu/news/ai-medical-research/",
+            "headline": "How AI is advancing medical research",
+            "summary": "these proteins on histological stains, AI models may enable doctors to more confidently link brain tissue findings to other biomarkers emerging from blood, fluid, and imaging tests, improving the accu",
+            "source_url": "https://www.med.wisc.edu/news/ai-medical-research/",
+            "source_domain": "www.med.wisc.edu",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.99482024
+        },
+        {
+            "topic_id": "topic_003",
+            "title": "AI agent in healthcare: applications, evaluations, and future directions",
+            "description": "## References\n\nWang, D. & Zhang, S. Large language models in medical and healthcare fields: applications, advances, and challenges. Artif. Intell. Rev. 57, 299 (2024).\n\nArticle \nGoogle Scholar\n\nNewWhi",
+            "url": "https://www.nature.com/articles/s44387-026-00076-4",
+            "headline": "AI agent in healthcare: applications, evaluations, and future directions",
+            "summary": "## References\n\nWang, D. & Zhang, S. Large language models in medical and healthcare fields: applications, advances, and challenges. Artif. Intell. Rev. 57, 299 (2024).\n\nArticle \nGoogle Scholar\n\nNewWhi",
+            "source_url": "https://www.nature.com/articles/s44387-026-00076-4",
+            "source_domain": "www.nature.com",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.9930962
+        },
+        {
+            "topic_id": "topic_004",
+            "title": "What AI Really Means for Healthcare Leaders in 2026",
+            "description": "On this episode Dan is joined by Don Woodlock, President of InterSystems, to explore how healthcare organizations can take a more strategic and disciplined approach to AI adoption. Drawing on InterSys",
+            "url": "https://www.healthitanswers.net/what-ai-really-means-for-healthcare-leaders-in-2026/",
+            "headline": "What AI Really Means for Healthcare Leaders in 2026",
+            "summary": "On this episode Dan is joined by Don Woodlock, President of InterSystems, to explore how healthcare organizations can take a more strategic and disciplined approach to AI adoption. Drawing on InterSys",
+            "source_url": "https://www.healthitanswers.net/what-ai-really-means-for-healthcare-leaders-in-2026/",
+            "source_domain": "www.healthitanswers.net",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.9921233
+        },
+        {
+            "topic_id": "topic_005",
+            "title": "HIMSS 2026: Trusted clinical AI shaping care delivery",
+            "description": "An industry survey revealed that 58% of frontline health system staff have used generic, free AI tools for work at least once a month, with 39% using generic AI weekly or more. This use of unofficial ",
+            "url": "https://www.wolterskluwer.com/en/expert-insights/himss-2026-trusted-clinical-ai-shaping-care-delivery",
+            "headline": "HIMSS 2026: Trusted clinical AI shaping care delivery",
+            "summary": "An industry survey revealed that 58% of frontline health system staff have used generic, free AI tools for work at least once a month, with 39% using generic AI weekly or more. This use of unofficial ",
+            "source_url": "https://www.wolterskluwer.com/en/expert-insights/himss-2026-trusted-clinical-ai-shaping-care-delivery",
+            "source_domain": "www.wolterskluwer.com",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.9872773
+        },
+        {
+            "topic_id": "topic_006",
+            "title": "Trending Topics in Precision Medicine: Individualizing Care for Your Patient Online Course | Medigy",
+            "description": "Read on arrowrxpills.com [...] Explore the cutting-edge domain of Precision Medicine with Mayo Clinic's online course, \"Trending Topics in Precision Medicine: Individualizing Care for Your Patients,\" ",
+            "url": "https://www.medigy.com/event/2023/11/16/ce-trending-topics-in-precision-medicine-individualizing-care-for-your-patient-online-course",
+            "headline": "Trending Topics in Precision Medicine: Individualizing Care for Your Patient Online Course | Medigy",
+            "summary": "Read on arrowrxpills.com [...] Explore the cutting-edge domain of Precision Medicine with Mayo Clinic's online course, \"Trending Topics in Precision Medicine: Individualizing Care for Your Patients,\" ",
+            "source_url": "https://www.medigy.com/event/2023/11/16/ce-trending-topics-in-precision-medicine-individualizing-care-for-your-patient-online-course",
+            "source_domain": "www.medigy.com",
+            "keywords": [
+                "AI",
+                "in",
+                "medicine"
+            ],
+            "published_date": "",
+            "relevance_score": 0.9462003
+        }
+    ]
+}

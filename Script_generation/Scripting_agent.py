@@ -1,11 +1,14 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import os
 import requests
+import json
+from urllib.parse import urlparse
 from groq import Groq
 from dotenv import load_dotenv
+from datetime import datetime, UTC
 
-# Load environment variables from .env file
+# Load environment variables
 load_dotenv()
 
 app = Flask(__name__, static_folder='.')
@@ -19,25 +22,88 @@ client = Groq(api_key=GROQ_API_KEY)
 TAVILY_API_KEY = os.getenv('TAVILY_API_KEY')
 TAVILY_API_URL = "https://api.tavily.com/search"
 
+# Create data folders
+TOPIC_FOLDER = "data/topics"
+SCRIPT_FOLDER = "data/scripts"
+
+os.makedirs(TOPIC_FOLDER, exist_ok=True)
+os.makedirs(SCRIPT_FOLDER, exist_ok=True)
+
+
+# -------------------------
+# Helper Functions
+# -------------------------
+
+def get_domain(url):
+    try:
+        return urlparse(url).netloc
+    except:
+        return ""
+
+
+def get_next_filename(folder, prefix):
+    """
+    Generates filenames like:
+    topics_metadata_001.json
+    topics_metadata_002.json
+    """
+    existing = [f for f in os.listdir(folder) if f.startswith(prefix)]
+
+    if not existing:
+        return f"{prefix}_001.json"
+
+    numbers = []
+
+    for f in existing:
+        try:
+            num = int(f.split("_")[-1].split(".")[0])
+            numbers.append(num)
+        except:
+            pass
+
+    next_num = max(numbers) + 1 if numbers else 1
+
+    return f"{prefix}_{str(next_num).zfill(3)}.json"
+
+
+def save_json(folder, prefix, data):
+    filename = get_next_filename(folder, prefix)
+    filepath = os.path.join(folder, filename)
+
+    with open(filepath, "w", encoding="utf-8") as f:
+        json.dump(data, f, indent=4, ensure_ascii=False)
+
+    return filepath
+
+
+# -------------------------
+# Routes
+# -------------------------
+
 @app.route('/')
 def index():
-    """Serve the HTML frontend"""
     return send_from_directory('.', 'ideas.html')
+
 
 @app.route('/script')
 def script_page():
-    """Serve the script generator page"""
     return send_from_directory('.', 'index.html')
+
 
 @app.route('/ideas')
 def ideas_page():
-    """Serve the ideas page"""
     return send_from_directory('.', 'ideas.html')
+
+
+# -------------------------
+# Topic Search Agent
+# -------------------------
 
 @app.route('/search-topics', methods=['POST'])
 def search_topics():
-    """Search for trending topics using Tavily"""
+
     try:
+
         data = request.get_json()
         idea_query = data.get('query', '').strip()
         time_range = data.get('time_range', 'week')
@@ -48,10 +114,6 @@ def search_topics():
         if not idea_query:
             return jsonify({'error': 'Query is required'}), 400
 
-        if (start_date and not end_date) or (end_date and not start_date):
-            return jsonify({'error': 'Both start and end dates are required'}), 400
-
-        # Expand the query to emphasize trending topics
         query = f"{idea_query} trending topics latest insights"
 
         payload = {
@@ -61,7 +123,7 @@ def search_topics():
             "include_answer": True,
             "include_raw_content": False,
             "max_results": max_results,
-            "time_range": time_range,
+            "time_range": time_range
         }
 
         if start_date and end_date:
@@ -81,93 +143,163 @@ def search_topics():
         results = result.get('results', [])
 
         topics = []
-        for item in results:
+
+        for i, item in enumerate(results):
+
             title = item.get('title', 'Untitled')
             snippet = item.get('content', '') or item.get('snippet', '')
             url = item.get('url', '')
-            description = snippet.strip() if snippet else "No description available."
+            published = item.get('published_date', '')
+            score = item.get('score', None)
 
+            # topics.append({
+
+            #     "topic_id": f"topic_{i+1:03}",
+            #     "headline": title,
+            #     "summary": snippet[:200],
+            #     "published_date": published,
+            #     "source_url": url,
+            #     "source_domain": get_domain(url),
+            #     "relevance_score": score,
+            #     "keywords": idea_query.split(),
+            #     "content_snippet": snippet,
+            #     "discovered_by_query": query,
+            #     "language": "en"
+
+            # })
             topics.append({
+
+                "topic_id": f"topic_{i+1:03}",
+
+                # frontend fields
                 "title": title,
-                "description": description,
+                "description": snippet[:200],
                 "url": url,
-                "copy_text": f"Topic: {title}\nDescription: {description}\nSource: {url}"
-            })
+
+                # metadata fields
+                "headline": title,
+                "summary": snippet[:200],
+                "source_url": url,
+                "source_domain": get_domain(url),
+                "keywords": idea_query.split(),
+                "published_date": item.get("published_date", ""),
+                "relevance_score": item.get("score", None)
+
+        })
+
+        topics_json = {
+
+            "generated_at": datetime.now(UTC).isoformat(),
+            "query": idea_query,
+            "time_range": time_range,
+            "topics_count": len(topics),
+            "topics": topics
+
+        }
+
+        print("Topics returned:", topics)
+
+        file_path = save_json(TOPIC_FOLDER, "topics_metadata", topics_json)
 
         return jsonify({
             'success': True,
-            'query': idea_query,
-            'time_range': time_range,
-            'start_date': start_date,
-            'end_date': end_date,
-            'answer': result.get('answer', ''),
-            'topics': topics
+            'topics': topics,
+            'saved_to': file_path
         })
 
-    except requests.exceptions.Timeout:
-        return jsonify({
-            'success': False,
-            'error': 'Tavily request timed out. Please try again.'
-        }), 504
     except Exception as e:
+
         return jsonify({
             'success': False,
-            'error': str(e)
+            'error': str(e)  
         }), 500
+
+
+# -------------------------
+# Script Generation Agent
+# -------------------------
 
 @app.route('/generate-script', methods=['POST'])
 def generate_script():
-    """Generate a script based on the user's topic"""
+
     try:
+
         data = request.get_json()
         topic = data.get('topic', '')
         script_type = data.get('script_type', 'general')
         duration = data.get('duration', '2-3 minutes')
         tone = data.get('tone', 'professional')
-        
+
         if not topic:
             return jsonify({'error': 'Topic is required'}), 400
-        
-        # Create a detailed prompt for script generation
-        prompt = f"""You are a professional script writer for Moonify. Write a compelling and engaging {script_type} script about: {topic}
 
-Script Requirements:
+        prompt = f"""
+You are a professional script writer for Moonify.
+
+Write a compelling {script_type} script about:
+
+{topic}
+
+Requirements:
+
 - Duration: {duration}
 - Tone: {tone}
-- Include a strong hook/introduction
-- Clear structure with introduction, main content, and conclusion
-- Engaging and conversational language
-- Professional formatting with scene descriptions or stage directions where appropriate
+- Strong hook
+- Clear introduction
+- Engaging main content
+- Strong conclusion
+- Conversational voice-over style
+"""
 
-Generate a complete, ready-to-use script."""
-
-        # Call Groq API to generate the script
         chat_completion = client.chat.completions.create(
+
             messages=[
-                {
-                    "role": "system",
-                    "content": "You are an expert script writer who creates engaging, well-structured scripts for various purposes including videos, presentations, podcasts, and more. You write in a clear, compelling style that captures and maintains audience attention."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
+                {"role": "system", "content": "You are an expert script writer."},
+                {"role": "user", "content": prompt}
             ],
+
             model="llama-3.3-70b-versatile",
             temperature=0.7,
-            max_tokens=2048,
+            max_tokens=2048
+
         )
-        
+
         script = chat_completion.choices[0].message.content
-        
+
+        script_data = {
+
+            "generated_at": datetime.now(UTC).isoformat(),
+
+            "script": {
+
+                "topic": topic,
+                "script_type": script_type,
+                "duration_target": duration,
+                "tone": tone,
+                "estimated_word_count": len(script.split()),
+                "target_platform": "general",
+                "language": "en",
+                "model_used": "llama-3.3-70b-versatile",
+                "script_text": script
+
+            }
+
+        }
+
+        file_path = save_json(SCRIPT_FOLDER, "script_output", script_data)
+
         return jsonify({
+
             'success': True,
             'script': script,
             'topic': topic,
-            'script_type': script_type
+            'script_type': script_type,
+            'saved_to': file_path
+
         })
-        
+
     except Exception as e:
+
         return jsonify({
             'success': False,
             'error': str(e)
@@ -175,34 +307,33 @@ Generate a complete, ready-to-use script."""
 
 @app.route('/summarize-idea', methods=['POST'])
 def summarize_idea():
-    """Summarize a topic idea in two lines max"""
+
     try:
+
         data = request.get_json()
         text = data.get('text', '').strip()
 
         if not text:
             return jsonify({'error': 'Text is required'}), 400
 
-        prompt = (
-            "Summarize the idea below in at most two lines. "
-            "Use plain text only, no bullets, no quotes.\n\n"
-            f"Idea: {text}"
-        )
+        prompt = f"""
+Summarize the following idea in **maximum two lines**.
+
+Idea:
+{text}
+"""
 
         chat_completion = client.chat.completions.create(
+
             messages=[
-                {
-                    "role": "system",
-                    "content": "You summarize ideas clearly and concisely."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
+                {"role": "system", "content": "You summarize ideas clearly and concisely."},
+                {"role": "user", "content": prompt}
             ],
+
             model="llama-3.3-70b-versatile",
             temperature=0.2,
-            max_tokens=120,
+            max_tokens=120
+
         )
 
         summary = chat_completion.choices[0].message.content.strip()
@@ -213,17 +344,27 @@ def summarize_idea():
         })
 
     except Exception as e:
+
         return jsonify({
             'success': False,
             'error': str(e)
         }), 500
 
-@app.route('/health', methods=['GET'])
+# -------------------------
+# Health Check
+# -------------------------
+
+@app.route('/health')
 def health():
-    """Health check endpoint"""
-    return jsonify({'status': 'healthy', 'service': 'Moonify Script Generator'})
+    return jsonify({
+        "status": "healthy",
+        "service": "Moonify Script Generator"
+    })
+
 
 if __name__ == '__main__':
+
     print("🌙 Moonify Script Generator Starting...")
-    print("📝 Visit http://localhost:5000 to use the script generator")
+    print("📝 Visit http://localhost:5000")
+
     app.run(debug=True, host='0.0.0.0', port=5000)
