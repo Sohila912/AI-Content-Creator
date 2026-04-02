@@ -7,6 +7,8 @@ from urllib.parse import urlparse
 from groq import Groq
 from dotenv import load_dotenv
 from datetime import datetime, UTC
+from chromadb import HttpClient
+from sentence_transformers import SentenceTransformer
 
 # Load environment variables
 load_dotenv()
@@ -17,6 +19,10 @@ CORS(app)
 # Initialize Groq client
 GROQ_API_KEY = os.getenv('GROQ_API_KEY')
 client = Groq(api_key=GROQ_API_KEY)
+
+# Initialize ChromaDB and embedding model
+chroma_client = HttpClient(host='localhost', port=8000)
+embedding_model = SentenceTransformer("all-MiniLM-L6-v2")
 
 # Tavily API configuration
 TAVILY_API_KEY = os.getenv('TAVILY_API_KEY')
@@ -83,7 +89,9 @@ def save_json(folder, prefix, data):
 @app.route('/')
 def index():
     return send_from_directory('.', 'ideas.html')
-
+@app.route('/search')
+def search_page():
+    return send_from_directory('.', 'search.html')
 
 @app.route('/script')
 def script_page():
@@ -213,6 +221,51 @@ def search_topics():
             'success': False,
             'error': str(e)  
         }), 500
+
+# ------------------------- 
+# Vector Search Topics
+# -------------------------
+
+@app.route('/vector-search', methods=['POST'])
+def vector_search():
+    try:
+        data = request.get_json()
+        query = data.get('query', '').strip()
+
+        if not query:
+            return jsonify({'error': 'Query is required'}), 400
+
+        # Get collection
+        collection = chroma_client.get_or_create_collection(name="topics")
+
+        # Encode query
+        query_embedding = embedding_model.encode(query).tolist()
+
+        # Search
+        results = collection.query(
+            query_embeddings=[query_embedding],
+            n_results=10,
+            include=["documents", "metadatas", "distances"]
+        )
+
+        # Format results
+        formatted_results = []
+        for i, (doc, meta, distance) in enumerate(zip(
+            results["documents"][0] if results["documents"] else [],
+            results["metadatas"][0] if results["metadatas"] else [],
+            results["distances"][0] if results["distances"] else []
+        )):
+            if meta:
+                formatted_results.append({
+                    'headline': meta.get('headline', 'No headline'),
+                    'summary': doc,
+                    'score': 1 - distance if distance else None  # Convert distance to similarity score
+                })
+
+        return jsonify({'results': formatted_results})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 
 # -------------------------
@@ -365,6 +418,9 @@ def health():
 if __name__ == '__main__':
 
     print("🌙 Moonify Script Generator Starting...")
-    print("📝 Visit http://localhost:5000")
+    print("📝 Visit http://localhost:5000/search")
+
+    import webbrowser
+    webbrowser.open('http://localhost:5000/search')
 
     app.run(debug=True, host='0.0.0.0', port=5000)

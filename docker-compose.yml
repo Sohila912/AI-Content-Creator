@@ -54,37 +54,5 @@ services:
       - ./import_topics.py:/import_topics.py
     command: bash -c "pip install pymongo==4.6.0 && python /import_topics.py"
 
-  api:
-    build: .
-    container_name: youtube_ai_api
-    ports:
-      - "5000:5000"
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    volumes:
-      - .:/app
-
-  chroma:
-    image: chromadb/chroma
-    container_name: youtube_ai_vector_db
-    ports:
-      - "8000:8000"
-    volumes:
-      - chroma_data:/chroma
-
-  vector_uploader:
-    build:
-      context: .
-      dockerfile: Dockerfile.vector
-    depends_on:
-      mongodb:
-        condition: service_healthy
-    volumes:
-      - ./vectorize_topics.py:/app/vectorize_topics.py
-      - ./data/topics:/app/data/topics
-    command: python vectorize_topics.py
-
 volumes:
   mongo_data:
-  chroma_data:

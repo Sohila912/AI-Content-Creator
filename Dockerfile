@@ -6,4 +6,4 @@ COPY . .
 
 RUN pip install --no-cache-dir flask flask-cors requests python-dotenv groq pymongo
 
-CMD ["python", "app.py"]
+CMD ["python", "Script_generation/Scripting_agent.py"]

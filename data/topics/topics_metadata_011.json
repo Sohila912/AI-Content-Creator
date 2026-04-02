@@ -1,0 +1,116 @@
+{
+    "generated_at": "2026-04-02T14:18:39.828568+00:00",
+    "query": "AI in movie making",
+    "time_range": "week",
+    "topics_count": 6,
+    "topics": [
+        {
+            "topic_id": "topic_001",
+            "title": "Commentary: The Disney/Sora fiasco shows the limits of the AI craze",
+            "description": "The hand-wringing over ‘AI slop’ has reached a fever pitch, but no one can define it\n\nTCL’s AI-powered plunge into the content-creation business appears to have stalled. TCL Film Machine, an AI-fueled",
+            "url": "https://www.latimes.com/business/story/2026-03-30/disney-sora-fiasco-shows-limits-of-the-ai-craze-in-hollywood-and-everywhere-else",
+            "headline": "Commentary: The Disney/Sora fiasco shows the limits of the AI craze",
+            "summary": "The hand-wringing over ‘AI slop’ has reached a fever pitch, but no one can define it\n\nTCL’s AI-powered plunge into the content-creation business appears to have stalled. TCL Film Machine, an AI-fueled",
+            "source_url": "https://www.latimes.com/business/story/2026-03-30/disney-sora-fiasco-shows-limits-of-the-ai-craze-in-hollywood-and-everywhere-else",
+            "source_domain": "www.latimes.com",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.68798697
+        },
+        {
+            "topic_id": "topic_002",
+            "title": "The AI filmmaking revolution and your future - The Story Rules Project",
+            "description": "On the evening of 12 February 2026, ByteDance released Seedance 2.0, an AI video generator capable of producing fifteen-second clips of startling cinematic quality from mere text prompts. Within hours",
+            "url": "https://storyrulesproject.substack.com/p/the-ai-filmmaking-revolution-and",
+            "headline": "The AI filmmaking revolution and your future - The Story Rules Project",
+            "summary": "On the evening of 12 February 2026, ByteDance released Seedance 2.0, an AI video generator capable of producing fifteen-second clips of startling cinematic quality from mere text prompts. Within hours",
+            "source_url": "https://storyrulesproject.substack.com/p/the-ai-filmmaking-revolution-and",
+            "source_domain": "storyrulesproject.substack.com",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.68090034
+        },
+        {
+            "topic_id": "topic_003",
+            "title": "Generative AI in Movies Market to hit USD 3,857.3 million by 2033",
+            "description": "A major trend is the use of generative AI for virtual production and digital environments. Filmmakers are creating realistic scenes and environments using AI-",
+            "url": "https://vocal.media/futurism/generative-ai-in-movies-market-to-hit-usd-3-857-3-million-by-2033",
+            "headline": "Generative AI in Movies Market to hit USD 3,857.3 million by 2033",
+            "summary": "A major trend is the use of generative AI for virtual production and digital environments. Filmmakers are creating realistic scenes and environments using AI-",
+            "source_url": "https://vocal.media/futurism/generative-ai-in-movies-market-to-hit-usd-3-857-3-million-by-2033",
+            "source_domain": "vocal.media",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.65835214
+        },
+        {
+            "topic_id": "topic_004",
+            "title": "AI Is Reshaping Film Production, Replacing Extras and Slashing ...",
+            "description": "\"In film and television, the most touching moments often defy convention and common sense, and it's those imperfections that truly make humans and artistic creations fascinating,\" Yi said. \"AI does no",
+            "url": "https://www.yicaiglobal.com/news/ai-to-more-than-halve-movie-production-costs-famous-chinese-director-says",
+            "headline": "AI Is Reshaping Film Production, Replacing Extras and Slashing ...",
+            "summary": "\"In film and television, the most touching moments often defy convention and common sense, and it's those imperfections that truly make humans and artistic creations fascinating,\" Yi said. \"AI does no",
+            "source_url": "https://www.yicaiglobal.com/news/ai-to-more-than-halve-movie-production-costs-famous-chinese-director-says",
+            "source_domain": "www.yicaiglobal.com",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.56719416
+        },
+        {
+            "topic_id": "topic_005",
+            "title": "7 Thought-Provoking Hollywood Takes on AI - The Gospel Coalition",
+            "description": "### Eternal You (2024)\n\nThis straightforwardly dystopian documentary explores the darker possibilities of AI “resurrecting” dead loved ones and creating simulations of consciousness that theoretically",
+            "url": "https://www.thegospelcoalition.org/article/hollywood-takes-ai/",
+            "headline": "7 Thought-Provoking Hollywood Takes on AI - The Gospel Coalition",
+            "summary": "### Eternal You (2024)\n\nThis straightforwardly dystopian documentary explores the darker possibilities of AI “resurrecting” dead loved ones and creating simulations of consciousness that theoretically",
+            "source_url": "https://www.thegospelcoalition.org/article/hollywood-takes-ai/",
+            "source_domain": "www.thegospelcoalition.org",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.5402697
+        },
+        {
+            "topic_id": "topic_006",
+            "title": "Google Launches Veo 3.1 Lite, a More Cost-Effective AI ... - CNET",
+            "description": "Veo 3.1 Lite offers an assortment of features, including text-to-video and image-to-video, along with 16:9 and 9:16 aspect ratios, and video resolution up to 1080p. Veo 3.1 Lite doesn't support 4K res",
+            "url": "https://www.cnet.com/tech/services-and-software/google-announces-a-more-cost-effective-ai-video-generator-model/",
+            "headline": "Google Launches Veo 3.1 Lite, a More Cost-Effective AI ... - CNET",
+            "summary": "Veo 3.1 Lite offers an assortment of features, including text-to-video and image-to-video, along with 16:9 and 9:16 aspect ratios, and video resolution up to 1080p. Veo 3.1 Lite doesn't support 4K res",
+            "source_url": "https://www.cnet.com/tech/services-and-software/google-announces-a-more-cost-effective-ai-video-generator-model/",
+            "source_domain": "www.cnet.com",
+            "keywords": [
+                "AI",
+                "in",
+                "movie",
+                "making"
+            ],
+            "published_date": "",
+            "relevance_score": 0.23474897
+        }
+    ]
+}
