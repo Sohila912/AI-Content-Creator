@@ -1,0 +1,90 @@
+services:
+
+  mongodb:
+    image: mongo:7
+    container_name: youtube_ai_mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--username", "admin", "--password", "password", "--authenticationDatabase", "admin", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: youtube_ai_mongo_ui
+    restart: always
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongodb
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: password
+      ME_CONFIG_MONGODB_AUTH_DATABASE: admin
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: password
+
+  scripts_uploader:
+    image: python:3.11-slim
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./data/scripts:/data/scripts
+      - ./import_scripts.py:/import_scripts.py
+    command: bash -c "pip install pymongo==4.6.0 && python /import_scripts.py"
+
+  topics_uploader:
+    image: python:3.11-slim
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./data/topics:/data/topics
+      - ./import_topics.py:/import_topics.py
+    command: bash -c "pip install pymongo==4.6.0 && python /import_topics.py"
+
+  api:
+    build: .
+    container_name: youtube_ai_api
+    ports:
+      - "5000:5000"
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - .:/app
+
+  chroma:
+    image: chromadb/chroma
+    container_name: youtube_ai_vector_db
+    ports:
+      - "8000:8000"
+    volumes:
+      - chroma_data:/chroma
+
+  vector_uploader:
+    build:
+      context: .
+      dockerfile: Dockerfile.vector
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    volumes:
+      - ./vectorize_topics.py:/app/vectorize_topics.py
+      - ./data/topics:/app/data/topics
+    command: python vectorize_topics.py
+
+volumes:
+  mongo_data:
+  chroma_data:
