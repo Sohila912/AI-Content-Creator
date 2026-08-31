@@ -258,7 +258,8 @@ Requirements:
                 {"role": "user", "content": prompt}
             ],
 
-            model="llama-3.3-70b-versatile",
+            # model="llama-3.3-70b-versatile",
+            model="openai/gpt-oss-120b",
             temperature=0.7,
             max_tokens=2048
 
@@ -279,7 +280,8 @@ Requirements:
                 "estimated_word_count": len(script.split()),
                 "target_platform": "general",
                 "language": "en",
-                "model_used": "llama-3.3-70b-versatile",
+                # "model_used": "llama-3.3-70b-versatile",
+                "model_used": "llama-3.1-8b-instant",
                 "script_text": script
 
             }
@@ -317,7 +319,14 @@ def summarize_idea():
             return jsonify({'error': 'Text is required'}), 400
 
         prompt = f"""
-Summarize the following idea in **maximum two lines**.
+Summarize the following idea in 1-2 complete sentences.
+
+IMPORTANT:
+- The summary must be complete.
+- Do not end mid-sentence.
+- Do not introduce information that is not in the idea.
+- Capture the main purpose and key details.
+- Return ONLY the summary.
 
 Idea:
 {text}
@@ -330,9 +339,10 @@ Idea:
                 {"role": "user", "content": prompt}
             ],
 
-            model="llama-3.3-70b-versatile",
+            # model="llama-3.3-70b-versatile", 
+            model="openai/gpt-oss-20b",
             temperature=0.2,
-            max_tokens=120
+            max_tokens=200
 
         )
 
@@ -353,7 +363,31 @@ Idea:
 # -------------------------
 # Health Check
 # -------------------------
+##################################################################################
+# @app.route('/groq-models')
+# def groq_models():
 
+#     try:
+#         models = client.models.list()
+
+#         return jsonify({
+#             "success": True,
+#             "models": [
+#                 {
+#                     "id": model.id,
+#                     "active": getattr(model, "active", None)
+#                 }
+#                 for model in models.data
+#             ]
+#         })
+
+#     except Exception as e:
+
+#         return jsonify({
+#             "success": False,
+#             "error": str(e)
+#         }), 500
+    #####################################################################################
 @app.route('/health')
 def health():
     return jsonify({
