@@ -1,0 +1,98 @@
+{
+    "generated_at": "2026-08-31T09:53:26.789864+00:00",
+    "query": "learning",
+    "time_range": "week",
+    "topics_count": 6,
+    "topics": [
+        {
+            "topic_id": "topic_001",
+            "title": "Latest News on Trending Topics Across the World",
+            "description": "♡\n\nReleased: 28-Aug-2026 9:30 PM EDT  ###### UA Little Rock Dean takes Student-Focused Approach University of Arkansas at Little Rock\n\nAs dean of CHASSE, Dr. Jeremy Ecke is focused on creating more op",
+            "url": "https://www.newswise.com/articles/list/latest-news",
+            "headline": "Latest News on Trending Topics Across the World",
+            "summary": "♡\n\nReleased: 28-Aug-2026 9:30 PM EDT  ###### UA Little Rock Dean takes Student-Focused Approach University of Arkansas at Little Rock\n\nAs dean of CHASSE, Dr. Jeremy Ecke is focused on creating more op",
+            "source_url": "https://www.newswise.com/articles/list/latest-news",
+            "source_domain": "www.newswise.com",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.5792344
+        },
+        {
+            "topic_id": "topic_002",
+            "title": "The 12 Biggest Challenges L&D Teams Must Tackle in 2026",
+            "description": "McKinsey’s perspective on learning trends highlights that organisations increasingly expect capability-building programmes to link directly to business metrics and transformation outcomes. Digital lea",
+            "url": "https://thirst.io/blog/learning-and-development-challenges-2026",
+            "headline": "The 12 Biggest Challenges L&D Teams Must Tackle in 2026",
+            "summary": "McKinsey’s perspective on learning trends highlights that organisations increasingly expect capability-building programmes to link directly to business metrics and transformation outcomes. Digital lea",
+            "source_url": "https://thirst.io/blog/learning-and-development-challenges-2026",
+            "source_domain": "thirst.io",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.5614318
+        },
+        {
+            "topic_id": "topic_003",
+            "title": "5 Trends in Education Shaping the Future of Learning",
+            "description": "## 2. Personalized learning replacing one-size-fits-all instruction\n\nGone are the days when every student in a class worked through the same worksheet at the same pace. AI-driven personalized learning",
+            "url": "https://teachers-blog.com/trends-in-education",
+            "headline": "5 Trends in Education Shaping the Future of Learning",
+            "summary": "## 2. Personalized learning replacing one-size-fits-all instruction\n\nGone are the days when every student in a class worked through the same worksheet at the same pace. AI-driven personalized learning",
+            "source_url": "https://teachers-blog.com/trends-in-education",
+            "source_domain": "teachers-blog.com",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.55072874
+        },
+        {
+            "topic_id": "topic_004",
+            "title": "EY - US | Shape the future with confidence",
+            "description": "28 Aug 2025Subbu Natarajan\n\nStrategy and Transactions\n\nHow Bristol Myers Squibb overhauled working capital to fund its future\n\n20 Aug 2025Gerado Gonzalez\n\nAlliances\n\nHow St James’s Hospital's journey ",
+            "url": "https://www.ey.com/en_us",
+            "headline": "EY - US | Shape the future with confidence",
+            "summary": "28 Aug 2025Subbu Natarajan\n\nStrategy and Transactions\n\nHow Bristol Myers Squibb overhauled working capital to fund its future\n\n20 Aug 2025Gerado Gonzalez\n\nAlliances\n\nHow St James’s Hospital's journey ",
+            "source_url": "https://www.ey.com/en_us",
+            "source_domain": "www.ey.com",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.498902
+        },
+        {
+            "topic_id": "topic_005",
+            "title": "How to Use Exploding Topics: A Quick Start Guide",
+            "description": "Exploding Topics analyzes this data using proprietary machine learning models. They look at historical growth patterns, current growth trajectory, and sudden surges in activity to recognize emerging t",
+            "url": "https://explodingtopics.com/blog/how-to-use-et",
+            "headline": "How to Use Exploding Topics: A Quick Start Guide",
+            "summary": "Exploding Topics analyzes this data using proprietary machine learning models. They look at historical growth patterns, current growth trajectory, and sudden surges in activity to recognize emerging t",
+            "source_url": "https://explodingtopics.com/blog/how-to-use-et",
+            "source_domain": "explodingtopics.com",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.498609
+        },
+        {
+            "topic_id": "topic_006",
+            "title": "Healthcare | Topical Collection : E-learning and Digital Training in Healthcare Education: Current Trends and New Challenges",
+            "description": "The Special Issue “E-learning and Digital Training in Healthcare Education: Current Trends and New Challenges” seeks research articles focusing on new insights into the use of interactive and intuitiv",
+            "url": "https://www.mdpi.com/journal/healthcare/special_issues/E-learning_Digital_Training_Healthcare_Education",
+            "headline": "Healthcare | Topical Collection : E-learning and Digital Training in Healthcare Education: Current Trends and New Challenges",
+            "summary": "The Special Issue “E-learning and Digital Training in Healthcare Education: Current Trends and New Challenges” seeks research articles focusing on new insights into the use of interactive and intuitiv",
+            "source_url": "https://www.mdpi.com/journal/healthcare/special_issues/E-learning_Digital_Training_Healthcare_Education",
+            "source_domain": "www.mdpi.com",
+            "keywords": [
+                "learning"
+            ],
+            "published_date": "",
+            "relevance_score": 0.4719782
+        }
+    ]
+}
