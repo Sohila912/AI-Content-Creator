@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Studio • Discover</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="ideas">
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div>
+        <div class="brand-name" data-brand>Content Studio</div>
+        <div class="brand-sub">Creative intelligence</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item active" href="/ideas"><span>◈</span> Discover</a>
+      <a class="nav-item" href="/script"><span>✎</span> Script Studio</a>
+    </nav>
+
+    <div class="sidebar-card">
+      <span class="status-dot"></span>
+      <div>
+        <strong>Studio online</strong>
+        <small>Research + generation ready</small>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">Private workspace · White label</div>
+  </aside>
+
+  <main class="main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">DISCOVERY ENGINE</div>
+        <h1>Find what people are talking about.</h1>
+        <p>Turn live research into high-potential content angles.</p>
+      </div>
+      <a class="top-action" href="/script">Open Script Studio <span>→</span></a>
+    </header>
+
+    <section class="hero-grid">
+      <div class="glass-card search-card">
+        <div class="card-title-row">
+          <div>
+            <span class="section-kicker">01 · SEARCH</span>
+            <h2>Discover trends</h2>
+          </div>
+          <span class="sparkle">✦</span>
+        </div>
+
+        <label for="query">What do you want to explore?</label>
+        <div class="input-wrap big">
+          <span>⌕</span>
+          <input id="query" placeholder="e.g. AI in healthcare, sustainable fashion..." autocomplete="off">
+        </div>
+
+        <div class="controls-row">
+          <div class="field">
+            <label>Freshness</label>
+            <select id="timeRange">
+              <option value="day">Today</option>
+              <option value="week" selected>This week</option>
+              <option value="month">This month</option>
+              <option value="year">This year</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Results</label>
+            <select id="maxResults">
+              <option>6</option><option selected>8</option><option>12</option><option>16</option>
+            </select>
+          </div>
+        </div>
+
+        <button id="searchBtn" class="primary-btn full"><span>✦</span> Discover topics</button>
+      </div>
+
+      <div class="gradient-card">
+        <div class="mini-orbit">✦</div>
+        <span class="section-kicker">CREATIVE LOOP</span>
+        <h2>Research → angle → script.</h2>
+        <p>Pick a live topic, send it to Script Studio, then generate a production-ready concept in seconds.</p>
+        <div class="loop">
+          <span>Research</span><i>→</i><span>Choose</span><i>→</i><span>Create</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="results-section">
+      <div class="section-heading">
+        <div>
+          <span class="section-kicker">02 · RESULTS</span>
+          <h2 id="resultsTitle">Your discoveries</h2>
+        </div>
+        <span class="result-count" id="resultCount">0 ideas</span>
+      </div>
+
+      <div id="results" class="topic-grid">
+        <div class="empty-state">
+          <div class="empty-icon">✧</div>
+          <h3>Ready when you are</h3>
+          <p>Search for a subject and the latest relevant stories will appear here.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Content Studio • Script Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body data-page="script">
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-mark">✦</div>
+      <div>
+        <div class="brand-name" data-brand>Content Studio</div>
+        <div class="brand-sub">Creative intelligence</div>
+      </div>
+    </div>
+
+    <nav class="nav">
+      <a class="nav-item" href="/ideas"><span>◈</span> Discover</a>
+      <a class="nav-item active" href="/script"><span>✎</span> Script Studio</a>
+    </nav>
+
+    <div class="sidebar-card">
+      <span class="status-dot"></span>
+      <div>
+        <strong>Studio online</strong>
+        <small>Live generation enabled</small>
+      </div>
+    </div>
+
+    <div class="sidebar-footer">Private workspace · White label</div>
+  </aside>
+
+  <main class="main script-main">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">SCRIPT STUDIO</div>
+        <h1>Build something worth watching.</h1>
+        <p>Shape the brief. Watch the script appear live.</p>
+      </div>
+      <div class="top-pills">
+        <span class="live-pill"><i></i> Live generation</span>
+        <button id="themeBtn" class="icon-btn" title="Change accent">◐</button>
+      </div>
+    </header>
+
+    <div class="studio-layout">
+      <section class="glass-card brief-panel">
+        <div class="card-title-row">
+          <div>
+            <span class="section-kicker">01 · CREATIVE BRIEF</span>
+            <h2>Set the direction</h2>
+          </div>
+          <button id="resetBtn" class="text-btn">Reset</button>
+        </div>
+
+        <div class="field">
+          <label for="topic">Topic / concept</label>
+          <textarea id="topic" rows="5" placeholder="Describe the story, product, campaign, or idea you want to turn into a script..."></textarea>
+          <div class="textarea-footer"><span id="charCount">0</span> characters</div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label>Format</label>
+            <div class="chip-row" id="scriptType">
+              <button class="chip active" data-value="Explainer">Explainer</button>
+              <button class="chip" data-value="Commercial">Commercial</button>
+              <button class="chip" data-value="Social">Social</button>
+              <button class="chip" data-value="Storytelling">Story</button>
+            </div>
+          </div>
+
+          <div class="field">
+            <label>Tone</label>
+            <div class="chip-row" id="tone">
+              <button class="chip active" data-value="Professional">Professional</button>
+              <button class="chip" data-value="Bold">Bold</button>
+              <button class="chip" data-value="Playful">Playful</button>
+              <button class="chip" data-value="Cinematic">Cinematic</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="duration">Duration</label>
+            <select id="duration">
+              <option>30–60 seconds</option>
+              <option selected>2–3 minutes</option>
+              <option>4–5 minutes</option>
+              <option>7–10 minutes</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="platform">Platform</label>
+            <select id="platform">
+              <option selected>YouTube</option>
+              <option>Instagram Reels</option>
+              <option>TikTok</option>
+              <option>LinkedIn</option>
+              <option>TV / Commercial</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label for="audience">Audience</label>
+            <input id="audience" value="General audience" placeholder="Who is this for?">
+          </div>
+          <div class="field">
+            <label for="language">Language</label>
+            <select id="language">
+              <option selected>English</option>
+              <option>Arabic</option>
+              <option>French</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="cta">Call to action <span class="optional">optional</span></label>
+          <input id="cta" value="End with a natural call to action." placeholder="What should viewers do next?">
+        </div>
+
+        <button id="generateBtn" class="primary-btn full generate-btn">
+          <span class="btn-icon">✦</span><span id="generateLabel">Generate live script</span><span class="arrow">→</span>
+        </button>
+      </section>
+
+      <section class="output-card">
+        <div class="output-top">
+          <div>
+            <span class="section-kicker">02 · OUTPUT</span>
+            <h2>Your script</h2>
+          </div>
+          <div class="output-actions">
+            <button id="copyBtn" class="small-btn">Copy</button>
+            <button id="downloadBtn" class="small-btn">Export .txt</button>
+          </div>
+        </div>
+
+        <div class="script-meta">
+          <span id="wordCount">0 words</span>
+          <span id="outputStatus">Waiting for a brief</span>
+        </div>
+
+        <div id="scriptOutput" class="script-output">
+          <div class="output-empty">
+            <div class="pulse-orb">✦</div>
+            <h3>The blank page won't stay blank.</h3>
+            <p>Configure your brief and hit <strong>Generate live script</strong>. The words will stream in here as they're produced.</p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+
+<div id="toast" class="toast"></div>
+<script src="/app.js"></script>
+</body>
+</html>
